@@ -39,10 +39,7 @@ Vector& Vector::operator=(const Vector& other){
 Vector::Vector(Vector&& other) noexcept{
 	_size = other._size;
     _capacity = other._capacity;
-    _data = new Value[_capacity];
-    for(int i = 0; i < _size; i++){
-        _data[i] = other._data[i];    
-    }
+    _data = other._data;
 	other._data = nullptr;
     other._size = 0;
     other._capacity = 1;
@@ -54,10 +51,7 @@ Vector& Vector::operator=(Vector&& other) noexcept{
     delete[] _data;
 	_size = other._size;
     _capacity = other._capacity;
-    _data = new Value[_capacity];
-    for(int i = 0; i < _size; i++){
-        _data[i] = other._data[i];    
-    }
+    _data = other._data;
 	other._data = nullptr;
     other._size = 0;
     other._capacity = 1;	
