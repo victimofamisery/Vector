@@ -67,5 +67,6 @@ int main(){
     double* c = new double[10] { 1,2,3,4,5,6,7,8,9,10 };
     b.insert(c, 8, 3);
     std::cout << b << std::endl;
+    delete[] c;
     return 0;
 }
