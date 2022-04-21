@@ -87,8 +87,8 @@ void Vector::pushFront(const Value& value){
 
 void Vector::insert(const Value& value, size_t pos){
 	if(pos > _size){
-        throw std::out_of_range("pos > _size");
-        return;
+		throw std::out_of_range("pos > _size");
+		return;
 	}
 	_reservebackend(_size + 1);
 	_size++;
