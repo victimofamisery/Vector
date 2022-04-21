@@ -34,7 +34,7 @@ Vector& Vector::operator=(const Vector& other){
 	_data = new Value[_capacity];
 	for(int i = 0; i < _size; i++){
 		_data[i] = other._data[i]; 
-    }
+	}
 	return *this;
 }
 
@@ -89,13 +89,13 @@ void Vector::insert(const Value& value, size_t pos){
 	if(pos > _size){
         throw std::out_of_range("pos > _size");
         return;
-    }
-    _reservebackend(_size + 1);
-    _size++;
-    for(int i = _size - 1; i > pos; i--){
-        _data[i] = _data[i - 1];
-    }
-    _data[pos] = value;
+	}
+	_reservebackend(_size + 1);
+	_size++;
+	for(int i = _size - 1; i > pos; i--){
+		_data[i] = _data[i - 1];
+	}
+	_data[pos] = value;
 }
 
 void Vector::insert(const Value* values, size_t size, size_t pos){
@@ -225,7 +225,7 @@ void Vector::_reservebackend(size_t capacity){
 		}
 		while((capacity > _capacity)){
 			_capacity *= _multiplicativeCoef;
-	    }
+		}
 		_realloc();
 	}
 }
@@ -260,11 +260,11 @@ void Vector::_realloc(){
 
 Vector::Iterator Vector::begin() const{
 		return Vector::Iterator(&_data[0]);
-	}
+}
 
 Vector::Iterator Vector::end() const{
 		return Vector::Iterator(&_data[_size]);
-	}
+}
 
 std::ostream& operator<<(std::ostream& out, const Vector& vector){
 	for(auto&& number : vector){
@@ -275,8 +275,8 @@ std::ostream& operator<<(std::ostream& out, const Vector& vector){
 
 //Iterator
 
-Vector::Iterator::Iterator(Value* ptr) : _ptr(ptr)
-{}
+Vector::Iterator::Iterator(Value* ptr) : _ptr(ptr){
+}
 
 Value& Vector::Iterator::operator*(){
 	return *_ptr;
