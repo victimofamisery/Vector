@@ -231,8 +231,8 @@ void Vector::_reservebackend(size_t capacity){
 }
 
 void Vector::shrinkToFit(){
-		_capacity = _size;
-		_realloc();
+	_capacity = _size;
+	_realloc();
 }
 
 bool Vector::_nullCheck(){
@@ -259,11 +259,11 @@ void Vector::_realloc(){
 }
 
 Vector::Iterator Vector::begin() const{
-		return Vector::Iterator(&_data[0]);
+	return Vector::Iterator(&_data[0]);
 }
 
 Vector::Iterator Vector::end() const{
-		return Vector::Iterator(&_data[_size]);
+	return Vector::Iterator(&_data[_size]);
 }
 
 std::ostream& operator<<(std::ostream& out, const Vector& vector){
