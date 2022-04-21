@@ -5,62 +5,62 @@
 
 Vector::Vector(const Value* rawArray, const size_t size, float coef)
 :_size(size), _multiplicativeCoef(coef){
-    _reservebackend(_size);
-    for(int i = 0; i < _size; i++){
-        _data[i] = rawArray[i];
-    }
+	_reservebackend(_size);
+	for(int i = 0; i < _size; i++){
+		_data[i] = rawArray[i];
+	}
 }
 
 
 
 Vector::Vector(const Vector& other){
-    _size = other._size;
-    _capacity = other._size;
-    _multiplicativeCoef = other._multiplicativeCoef;
-    _data = new Value[_capacity];
-    for(int i = 0; i < _size; i++){
-        _data[i] = other._data[i];    
-    }
+	_size = other._size;
+	_capacity = other._size;
+	_multiplicativeCoef = other._multiplicativeCoef;
+	_data = new Value[_capacity];
+	for(int i = 0; i < _size; i++){
+		_data[i] = other._data[i];
+	}
 }
 
 Vector& Vector::operator=(const Vector& other){
-    if(&other == this){
-        return *this;
+	if(&other == this){
+		return *this;
+	}
+	delete[] _data;
+	_size = other._size;
+	_capacity = other._size;
+	_multiplicativeCoef = other._multiplicativeCoef;
+	_data = new Value[_capacity];
+	for(int i = 0; i < _size; i++){
+		_data[i] = other._data[i]; 
     }
-    delete[] _data;
-    _size = other._size;
-    _capacity = other._size;
-    _multiplicativeCoef = other._multiplicativeCoef;
-    _data = new Value[_capacity];
-    for(int i = 0; i < _size; i++){
-        _data[i] = other._data[i];    
-    }
-    return *this;
+	return *this;
 }
 
 Vector::Vector(Vector&& other) noexcept{
-    _size = other._size;
-    _capacity = other._size;
-    _multiplicativeCoef = other._multiplicativeCoef;
-    _data = other._data;
-    other._data = nullptr;
-    other._size = 0;
-    other._capacity = 0;
+	_size = other._size;
+	_capacity = other._size;
+	_multiplicativeCoef = other._multiplicativeCoef;
+	_data = other._data;
+	other._data = nullptr;
+	other._size = 0;
+	other._capacity = 0;
 }
 
 Vector& Vector::operator=(Vector&& other) noexcept{
-    if(&other == this){
-        return *this;
-    }
-    delete[] _data;
-    _size = other._size;
-    _capacity = other._size;
-    _multiplicativeCoef = other._multiplicativeCoef;
-    _data = other._data;
-    other._data = nullptr;
-    other._size = 0;
-    other._capacity = 0;	
-    return *this;	
+	if(&other == this){
+		return *this;
+	}
+	delete[] _data;
+	_size = other._size;
+	_capacity = other._size;
+	_multiplicativeCoef = other._multiplicativeCoef;
+	_data = other._data;
+	other._data = nullptr;
+	other._size = 0;
+	other._capacity = 0;	
+	return *this;	
 }
 
 
