@@ -5,9 +5,9 @@
 
 Vector::Vector(const Value* rawArray, const size_t size, float coef)
 :_size(size), _multiplicativeCoef(coef){
-	_reservebackend(_size);
-	for(int i = 0; i < _size; i++){
-		_data[i] = rawArray[i];
+    _reservebackend(_size);
+    for(int i = 0; i < _size; i++){
+        _data[i] = rawArray[i];
 	}
 }
 
