@@ -140,7 +140,6 @@ void Vector::popBack(){
 	if(_size > 0){
 		_size--;
 	}
-	
 	else{
 		throw std::out_of_range("size = 0");
 	}
