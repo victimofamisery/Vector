@@ -172,5 +172,5 @@ private:
 
     bool _nullCheck();
     void _realloc();
-    void reservebackend(size_t capacity);
+    void _reservebackend(size_t capacity);
 };
