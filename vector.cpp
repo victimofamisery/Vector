@@ -8,7 +8,7 @@ Vector::Vector(const Value* rawArray, const size_t size, float coef)
     _reservebackend(_size);
     for(int i = 0; i < _size; i++){
         _data[i] = rawArray[i];
-	}
+    }
 }
 
 
@@ -16,7 +16,7 @@ Vector::Vector(const Value* rawArray, const size_t size, float coef)
 Vector::Vector(const Vector& other){
     _size = other._size;
     _capacity = other._size;
-	_multiplicativeCoef = other._multiplicativeCoef;
+    _multiplicativeCoef = other._multiplicativeCoef;
     _data = new Value[_capacity];
     for(int i = 0; i < _size; i++){
         _data[i] = other._data[i];    
@@ -28,9 +28,9 @@ Vector& Vector::operator=(const Vector& other){
         return *this;
     }
     delete[] _data;
-	_size = other._size;
+    _size = other._size;
     _capacity = other._size;
-	_multiplicativeCoef = other._multiplicativeCoef;
+    _multiplicativeCoef = other._multiplicativeCoef;
     _data = new Value[_capacity];
     for(int i = 0; i < _size; i++){
         _data[i] = other._data[i];    
@@ -39,11 +39,11 @@ Vector& Vector::operator=(const Vector& other){
 }
 
 Vector::Vector(Vector&& other) noexcept{
-	_size = other._size;
+    _size = other._size;
     _capacity = other._size;
-	_multiplicativeCoef = other._multiplicativeCoef;
+    _multiplicativeCoef = other._multiplicativeCoef;
     _data = other._data;
-	other._data = nullptr;
+    other._data = nullptr;
     other._size = 0;
     other._capacity = 0;
 }
@@ -53,11 +53,11 @@ Vector& Vector::operator=(Vector&& other) noexcept{
         return *this;
     }
     delete[] _data;
-	_size = other._size;
+    _size = other._size;
     _capacity = other._size;
-	_multiplicativeCoef = other._multiplicativeCoef;
+    _multiplicativeCoef = other._multiplicativeCoef;
     _data = other._data;
-	other._data = nullptr;
+    other._data = nullptr;
     other._size = 0;
     other._capacity = 0;	
     return *this;	
@@ -87,15 +87,15 @@ void Vector::pushFront(const Value& value){
 
 void Vector::insert(const Value& value, size_t pos){
 	if(pos > _size){
-		throw std::out_of_range("pos > _size");
-		return;
-	}
-	_reservebackend(_size + 1);
-	_size++;
-	for(int i = _size - 1; i > pos; i--){
-		_data[i] = _data[i - 1];
-	}
-	_data[pos] = value;
+        throw std::out_of_range("pos > _size");
+        return;
+    }
+    _reservebackend(_size + 1);
+    _size++;
+    for(int i = _size - 1; i > pos; i--){
+        _data[i] = _data[i - 1];
+    }
+    _data[pos] = value;
 }
 
 void Vector::insert(const Value* values, size_t size, size_t pos){
