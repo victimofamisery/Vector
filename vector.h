@@ -158,8 +158,7 @@ public:
         Iterators realisation.
     */
     Iterator begin() const;
-
-	Iterator end() const;
+    Iterator end() const;
 
     friend std::ostream& operator<<(std::ostream& out, const Vector& vector);
 
