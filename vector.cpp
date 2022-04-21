@@ -20,7 +20,7 @@ Vector::Vector(const Vector& other){
 	_data = new Value[_capacity];
 	for(int i = 0; i < _size; i++){
 		_data[i] = other._data[i];
-	}
+		}
 }
 
 Vector& Vector::operator=(const Vector& other){
