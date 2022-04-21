@@ -5,7 +5,7 @@
 
 Vector::Vector(const Value* rawArray, const size_t size, float coef)
 :_size(size), _multiplicativeCoef(coef){
-		reservebackend(_size);
+		_reservebackend(_size);
 		for(int i = 0; i < _size; i++){
 			_data[i] = rawArray[i];
 		}
@@ -47,6 +47,7 @@ Vector::Vector(Vector&& other) noexcept{
     other._size = 0;
     other._capacity = 0;
 }
+
 Vector& Vector::operator=(Vector&& other) noexcept{
     if(&other == this){
         return *this;
@@ -89,7 +90,7 @@ void Vector::insert(const Value& value, size_t pos){
 		throw std::out_of_range("pos > _size");
 		return;
 	}
-	reservebackend(_size + 1);
+	_reservebackend(_size + 1);
 	_size++;
 	for(int i = _size - 1; i > pos; i--){
 		_data[i] = _data[i - 1];
@@ -105,7 +106,7 @@ void Vector::insert(const Value* values, size_t size, size_t pos){
 		throw std::out_of_range("pos > _size");
 		return;
 	}
-	reservebackend(_size + size);
+	_reservebackend(_size + size);
 	_size += size;
 	for(int i = _size - 1; i > pos; i--){
 		_data[i] = _data[i - size];
@@ -120,7 +121,7 @@ void Vector::insert(const Vector& vector, size_t pos){
 		throw std::out_of_range("pos > _size");
 		return;
 	}
-	reservebackend(_size + vector.size());
+	_reservebackend(_size + vector.size());
 	_size += vector.size();
 	for(int i = _size - 1; i > pos; i--){
 		_data[i] = _data[i - vector.size()];
@@ -208,6 +209,7 @@ long long Vector::find(const Value& value) const{
 	}
 	return -1;
 }
+
 void Vector::reserve(size_t capacity){
 	if(capacity > _capacity){
 		_capacity = capacity;
@@ -216,14 +218,14 @@ void Vector::reserve(size_t capacity){
 }
 
 
-void Vector::reservebackend(size_t capacity){
+void Vector::_reservebackend(size_t capacity){
 	if(capacity > _capacity && capacity > 0){
 		if(_capacity == 0){
 			_capacity = 1 * _multiplicativeCoef;
 		}
 		while((capacity > _capacity)){
 			_capacity *= _multiplicativeCoef;
-	}
+	    }
 		_realloc();
 	}
 }
@@ -256,13 +258,11 @@ void Vector::_realloc(){
 	_data = newdata;
 }
 
-Vector::Iterator Vector::begin() const
-	{
+Vector::Iterator Vector::begin() const{
 		return Vector::Iterator(&_data[0]);
 	}
 
-Vector::Iterator Vector::end() const
-	{
+Vector::Iterator Vector::end() const{
 		return Vector::Iterator(&_data[_size]);
 	}
 
@@ -278,82 +278,68 @@ std::ostream& operator<<(std::ostream& out, const Vector& vector){
 Vector::Iterator::Iterator(Value* ptr) : _ptr(ptr)
 {}
 
-Value& Vector::Iterator::operator*()
-{
+Value& Vector::Iterator::operator*(){
 	return *_ptr;
 }
 
-const Value& Vector::Iterator::operator*() const
-{
+const Value& Vector::Iterator::operator*() const{
 	return *_ptr;
 }
 
-Value* Vector::Iterator::operator->()
-{
+Value* Vector::Iterator::operator->(){
 	return _ptr;
 }
 
-const Value* Vector::Iterator::operator->() const
-{
+const Value* Vector::Iterator::operator->() const{
 	return _ptr;
 }
 
 
 
-Vector::Iterator Vector::Iterator::operator+(int x)
-{
+Vector::Iterator Vector::Iterator::operator+(int x){
 	Vector::Iterator bufIt(_ptr + x); 
 	return bufIt;
 }
 
-void Vector::Iterator::operator+=(int x)
-{
+void Vector::Iterator::operator+=(int x){
 	*this = *this + x;
 }
 
-Vector::Iterator Vector::Iterator::operator-(int x)
-{
+Vector::Iterator Vector::Iterator::operator-(int x){
 	Vector::Iterator bufIt(_ptr - x); 
 	return bufIt;
 }
 
-void Vector::Iterator::operator-=(int x)
-{
+void Vector::Iterator::operator-=(int x){
 	*this = *this - x;
 }
 
-Vector::Iterator Vector::Iterator::operator++()
-{
+Vector::Iterator Vector::Iterator::operator++(){
 	++_ptr;
 	return *this;
 }
 
-Vector::Iterator Vector::Iterator::operator++(int)
-{
+Vector::Iterator Vector::Iterator::operator++(int){
 	Vector::Iterator bufIt = *this;
 	++*this;
 	return bufIt;
 }
 
-Vector::Iterator Vector::Iterator::operator--()
-{
+Vector::Iterator Vector::Iterator::operator--(){
 	--_ptr;
 	return *this;
 }
 
-Vector::Iterator Vector::Iterator::operator--(int)
-{
+Vector::Iterator Vector::Iterator::operator--(int){
 	Vector::Iterator bufIt = *this;
 	--*this;
 	return bufIt;
 }
 
-bool Vector::Iterator::operator==(const Vector::Iterator& other) const
-{
+bool Vector::Iterator::operator==(const Vector::Iterator& other) const{
 	return _ptr == other._ptr;
 }
 
-bool Vector::Iterator::operator!=(const Vector::Iterator& other) const
-{
+bool Vector::Iterator::operator!=(const Vector::Iterator& other) const{
 	return !(*this == other);
 }
