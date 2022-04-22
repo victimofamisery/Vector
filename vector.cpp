@@ -123,7 +123,7 @@ void Vector::erase(size_t pos, size_t count) {
 	}
 	_size -= count;
 	for(auto i = pos; i < _size; i++) {
-		_data[i] = _data[i + count];
+		_data[i] = std::move(_data[i + count]);
 	}
 }
 
