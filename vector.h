@@ -169,7 +169,6 @@ private:
     size_t _capacity = 0;
     float _multiplicativeCoef = 2.0f;
 
-    bool _nullCheck();
     void _realloc();
-    void _reservebackend(size_t capacity);
+    void _reserveBackend(size_t capacity);
 };
