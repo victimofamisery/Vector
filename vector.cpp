@@ -176,7 +176,7 @@ void Vector::reserve(size_t capacity) {
 
 
 void Vector::_reserveBackend(size_t capacity) {
-	if(capacity > _capacity && capacity > 0) {
+	if(capacity > _capacity) {
 		if(_capacity == 0) {
 			_capacity = 1 * _multiplicativeCoef;
 		}
