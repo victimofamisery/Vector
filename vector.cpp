@@ -6,7 +6,7 @@
 Vector::Vector(const Value* rawArray, const size_t size, float coef)
 :_size(size), _multiplicativeCoef(coef) {
 	_reserveBackend(_size);
-	for(auto i = 0; i < _size; i++) {
+	for(size_t i = 0; i < _size; i++) {
 		_data[i] = rawArray[i];
 	}
 }
@@ -18,7 +18,7 @@ Vector::Vector(const Vector& other) {
 	_capacity = other._size;
 	_multiplicativeCoef = other._multiplicativeCoef;
 	_data = new Value[_capacity];
-	for(auto i = 0; i < _size; i++) {
+	for(size_t i = 0; i < _size; i++) {
 		_data[i] = other._data[i];
 	}
 }
@@ -32,7 +32,7 @@ Vector& Vector::operator=(const Vector& other) {
 	_capacity = other._size;
 	_multiplicativeCoef = other._multiplicativeCoef;
 	_data = new Value[_capacity];
-	for(auto i = 0; i < _size; i++) {
+	for(size_t i = 0; i < _size; i++) {
 		_data[i] = other._data[i]; 
 	}
 	return *this;
@@ -87,10 +87,10 @@ void Vector::insert(const Value* values, size_t size, size_t pos) {
 	}
 	_reserveBackend(_size + size);
 	_size += size;
-	for(auto i = _size - 1; i > pos; i--) {
+	for(size_t i = _size - 1; i > pos; i--) {
 		_data[i] = std::move(_data[i - size]);
 	}
-	for(auto i = 0; i < size; i++) {
+	for(size_t i = 0; i < size; i++) {
 		_data[pos + i] = values[i];
 	}	
 }
@@ -122,7 +122,7 @@ void Vector::erase(size_t pos, size_t count) {
 		count = _size - pos;
 	}
 	_size -= count;
-	for(auto i = pos; i < _size; i++) {
+	for(size_t i = pos; i < _size; i++) {
 		_data[i] = std::move(_data[i + count]);
 	}
 }
@@ -159,7 +159,7 @@ const Value& Vector::operator[](size_t idx) const {
 
 
 long long Vector::find(const Value& value) const {
-	for(auto i = 0; i < _size; i++) {
+	for(size_t i = 0; i < _size; i++) {
 		if(value == _data[i]) {
 			return i;
 		}
@@ -201,7 +201,7 @@ void Vector::_realloc() {
 		return;
 	}
 	Value* newData = new Value[_capacity];
-	for(auto i = 0; i < _size; i++) {
+	for(size_t i = 0; i < _size; i++) {
 		newData[i] = _data[i];
 	}
 	delete[] _data;
